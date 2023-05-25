@@ -214,8 +214,7 @@ options = odeset('RelTol',1e-9,'AbsTol',1e-12,'Events',@pendEvents);
 % one interesting thing to note is that if I set the event to be zero
 % angle, the optimization would not converge on zero angular velocity. But
 % when I set the even to zero velocity, and searched for the Tswitch that
-% yielded zero angle, the optimization converged. I think Sayed may also be
-% having this problem. 
+% yielded zero angle, the optimization converged. 
 
 % final time and states are the two sim results joined together.
 t = [t(1:end-1);tnew];

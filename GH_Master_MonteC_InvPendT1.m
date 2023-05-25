@@ -1,11 +1,12 @@
 %Master_MonteC_InvPendT1
 % Code to pass InitVal to MonteC_InvPend to get confidence intervals on
 % the coefficient and exponent of the inertial delay scaling law for the
-% inverted pendulum. Doing only Froude perturbations. When using the 95% confidence interval lower bounds,
+% inverted pendulum. Scaling initial
+%perturbation velocity based on Froude number, not constant angular
+%velocity. When using the 95% confidence interval lower bounds,
 %i.e. longest limbs and weakest muscle, the strength limit is 0.0483 Fr
 %T1 uses fitlm type 1 regression data
-% see ID doc 5-0-2
-% see ID paper drafting doc 3-0 Posture task Type 1 regress graphs
+
 
 clear all;close all;clc;
 %% Loading data
@@ -64,8 +65,8 @@ AnkleExt.TABLE(3,:)=[PowerL.aAMusc,PowerL.aAMuscRange,PowerL.CIAMusc(1,:),PowerL
 %% Running the simulations 
 
 %{1
-%InitVal2=-0.01:-0.01:-0.49;modenam='Froude perturbation';labelx='Froude number';% in degrees. ORIGINAL
-InitVal2=-0.01:-0.1:-0.49;modenam='Froude perturbation';labelx='Froude number';% in degrees. Test
+InitVal2=-0.01:-0.01:-0.49;modenam='Froude perturbation';labelx='Froude number';% in degrees. ORIGINAL
+%InitVal2=-0.01:-0.1:-0.49;modenam='Froude perturbation';labelx='Froude number';% in degrees. Test
 
 Exp=[-3,log10(0.005),-2,-1,0,1,2,3,log10(5000),4];
 MonteC.DelayVals=zeros(Niter,length(Exp),length(InitVal2));
@@ -104,7 +105,7 @@ end
 %}
 
 
-%%
+%% Saving data
 %{
 t=datetime;
 coderutime=toc;
@@ -217,10 +218,6 @@ axis([ 0 max(-InitValB) 0 0.5]);
 ylabel('b')
 xlabel('Dimensionless velocity')
 
-
-
-
-
 end
 
 disp(['Posture task mean exponent values ::' num2str(mean(MonteC.bCI(:,1))) ' ' num2str(mean(PowerLawB(:,2))) ' ' num2str(mean(MonteC.bCI(:,2)))   ])
@@ -264,49 +261,4 @@ plot(-InitVal2,MonteC.b2CI(:,2),'r.-','LineWidth',2)
 axis([ 0 max(-InitVal) 0 max(MonteC.b2CI(:,2))]);
 xlabel(labelx)
 ylabel('Exponent')
-%}
-%% COMPS presentation grapsh
-%{
-%close all;
-% VARIATION OF COEFF AND EXPONENT WITH PERTURBATION SIZE----Paper---------------
-nam=['COMPS presentation graph-InvPend'];
-figure('name',nam)
-subplot(2,1,1)
-hold on;
-% plot(-InitVal,PowerLaw(:,1).*1000,'k-','LineWidth',2)
-plot(-InitVal2,MonteC.a(:,1).*1000,'r-','LineWidth',1)
-plot(-InitVal2,MonteC.aCI(:,1).*1000,'r--','LineWidth',1)
-plot(-InitVal2,MonteC.aCI(:,2).*1000,'r--','LineWidth',1)
-% plot(-InitVal2,MonteC.a2(:,1).*1000,'k-','LineWidth',2)
-% plot(-InitVal(1:indG),PowerLawG(1:indG,1).*1000,'g-','LineWidth',2)
-% 
-% plot(-InitVal2,MonteC.a2CI(:,1).*1000,'r.-','LineWidth',2)
-% plot(-InitVal2,MonteC.a2CI(:,2).*1000,'r.-','LineWidth',2)
-axis([ 0 max(-InitVal) 0 max(MonteC.a2CI(:,2).*1000)]);
-%xlabel(labelx)
-ylabel('Coefficient (ms)')
-%grid on;
-%title(nam);
-%legend('Kilbourne Mean','Geometric Scaling','Monte Carlo mean','95% CI')
-%legend('Kilbourne Scaling','Geometric Scaling','a-Ignore bad sims','95% CI','95% CI','a2-Consider bad sims','95% CI2','95% CI2')
-legend('Mean','+ 95% CI','- 95% CI')
-
-%title('Confidence Intervals Posture Task')
-
-subplot(2,1,2)
-hold on;
-%plot(-InitVal,PowerLaw(:,2),'k-','LineWidth',2)
-plot(-InitVal2,MonteC.b(:,1),'r-','LineWidth',1)
-plot(-InitVal2,MonteC.bCI(:,1),'r--','LineWidth',1)
-plot(-InitVal2,MonteC.bCI(:,2),'r--','LineWidth',1)
-% plot(-InitVal2,MonteC.b2(:,1),'k','LineWidth',2)
-% plot(-InitVal(1:indG),PowerLawG(1:indG,2),'g-','LineWidth',2)
-% plot(-InitVal2,MonteC.b2CI(:,1),'r.-','LineWidth',2)
-% plot(-InitVal2,MonteC.b2CI(:,2),'r.-','LineWidth',2)
-%axis([ 0 max(-InitVal) 0 max(MonteC.b2CI(:,2))]);
-xlabel('Dimensionless velocity')
-ylabel('Exponent')
-axis([ 0 max(-InitVal) 0  0.5]);
-
-%grid on;
 %}

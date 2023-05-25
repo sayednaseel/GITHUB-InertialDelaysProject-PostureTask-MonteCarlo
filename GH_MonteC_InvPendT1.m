@@ -1,7 +1,8 @@
 function [OP]=GH_MonteC_InvPendT1(InitVal2,Niter,Exp,mdl_LlimbF,mdl_LlimbH,PowerL)
 
-%Code to run Monte Carlo sims on the inverted pendulum. Performing Monte
-%Carlos sims only for the Froude perturabtions.
+%Code to run Monte Carlo sims on the inverted pendulum. Scaling initial
+%perturbation velocity based on Froude number, not constant angular
+%velocity. 
 % Inputs:: 
 % InitVal2 is the Froude number.
 % Niter is the number of iterations.
