@@ -8,6 +8,7 @@ The posture task represents an animal that has been pushed forward in the sagitt
 - Muscle mass
 - Muscle length
 - Muscle moment arm
+
 ![picture](PostureTask-InvPend_Pic.jpg)
 
 We used Monte Carlo simulations to propagate the uncertainty in the input parameters (quantified by their confidence intervals) through to the output (the confidence intervals for the scaling of inertial delay).
