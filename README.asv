@@ -23,7 +23,7 @@ The repository contains the following files:
 - GH_InvPendT1: Simulates the posture task. Halts the simulation when the pendulum reaches 0 velocity. Then optimizes the time to switch the direction of the bang-bang controller torque (Tswitch) using the fsolve optimizer (trust-region dogleg algorithm), to get the inverted pendulum to stop exactly at the vertical position.
 - forelimbCIcalcv3.mat: Probability distributions for forelimb inertial properties from Kilbourne and Hoffman 2013. 
 - hindlimbCIcalcv3.mat: Probability distributions for hindlimb inertial properties from Kilbourne and Hoffman 2013.
-- InvPendT1-Froude_pert.mat: Dataset with results from Posture Task simulations considering only mean values. 
+- InvPendT1-Froude_pert.mat: Dataset with results from Posture task sims withou
 
 ## References
 Thangal, S.N.M., Donelan, J.M., 2020. Scaling of inertial delays in terrestrial mammals. PLoS One 15, e0217188. https://doi.org/10.1371/journal.pone.0217188
